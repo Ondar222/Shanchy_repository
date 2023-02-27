@@ -1,6 +1,5 @@
 ---
 import PageName from "../../components/PageName/PageName.astro";
-import DocumentCard from "../../components/Document/DocumentCard.jsx";
 import MainPageLayout from "../../layouts/MainPageLayout.astro";
 import StandartLayout from "../../layouts/StandartLayout.astro";
 import DocumentsFilter from "../../components/Document/DocumentsFilter";
@@ -9,6 +8,6 @@ import DocumentsFilter from "../../components/Document/DocumentsFilter";
 <StandartLayout title="Банк документов">
   <PageName title="Банк документов" />
   <MainPageLayout>
-    <DocumentsFilter client:load />
+    <DocumentsFilter client:idle/>
   </MainPageLayout>
 </StandartLayout>
