@@ -1,0 +1,37 @@
+---
+import DocumentLink from "../../components/Document/DocumentLink";
+import PageName from "../../components/PageName/PageName.astro";
+import ProjectPage from "../../components/Projects/ProjectPage.astro";
+import ActivityPageLayout from "../../layouts/ActivityPageLayout.astro";
+import MainPageLayout from "../../layouts/MainPageLayout.astro";
+import StandartLayout from "../../layouts/StandartLayout.astro";
+
+const { id } = Astro.params;
+
+const project = await fetch(
+  `${import.meta.env.PUBLIC_URL}/api/projects/${id}?populate=*`
+)
+  .then((res) => res.json())
+  .then((res) => res.data)
+  .catch((err) => console.error(err));
+---
+
+<StandartLayout title={project.page.title}>
+  <PageName title={project.page.title} />
+  <ActivityPageLayout>
+    <div class="w-full flex gap-7" style="width: 100%;">
+      <div class="xs:w-full md:w-4/5 flex flex-col gap-4 text-2xl bg-black" style="width: 100%;">
+        <div class="break-keep" style="width: 100%;" set:html={project?.page?.content} />
+        {
+          project?.page?.documents.map((item) => (
+            <DocumentLink
+              client:load
+              filename={item.file?.name}
+              url={import.meta.env.PUBLIC_URL + item.file?.url}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </ActivityPageLayout>
+</StandartLayout>

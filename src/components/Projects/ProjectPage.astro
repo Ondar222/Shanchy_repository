@@ -1,0 +1,15 @@
+---
+const params = Astro.props
+---
+
+<div class="">
+  <div set:html={params.description} />
+  <div>
+    <a
+      href={`${import.meta.env.PUBLIC_URL}` + params.documentURL}
+      class="button dark:bg-gray-500"
+    >
+      Паспорт программы
+    </a>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+---
+import ActivityPageLayout from "../../layouts/ActivityPageLayout.astro";
+import StandartLayout from "../../layouts/StandartLayout.astro";
+import PageName from "../../components/PageName/PageName.astro";
+import DocumentLink from "../../components/Document/DocumentLink";
+
+const res = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/deyatelnost-page?populate[0]=page.documents&populate[1]=slider.image&populate[2]=pinned_links.image`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+---
+
+<StandartLayout title="Деятельность">
+  <PageName title="Деятельность" />
+  <ActivityPageLayout>
+    <div class="container__page__deyatelnost">
+      <div class="container__page__name">
+        <div class="break-keep" set:html={res?.page?.content} />
+        {
+          res?.page?.document?.map((item) => (
+            <DocumentLink
+              client:load
+              filename={item?.file?.name}
+              url={import.meta.env.PUBLIC_URL + item?.file?.url}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </ActivityPageLayout>
+</StandartLayout>

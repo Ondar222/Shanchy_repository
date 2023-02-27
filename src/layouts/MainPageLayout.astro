@@ -1,0 +1,32 @@
+---
+import MobileMenuItem from "../components/MobileMenu/MobileMenuItem";
+import MobileMenu from "../components/MobileMenu";
+const mobile = [
+  { url: "/", title: "Главная" },
+  { url: "/documents", title: "Документы" },
+  { url: "/appeals", title: "Прием обращений" },
+  { url: "/about", title: "Об администрации" },
+  { url: "/activity", title: "Деятельность" },
+  { url: "/contacts", title: "Контакты" },
+];
+---
+
+<div class="bg-blue-900">
+  <div class="container mx-auto ">
+    <MobileMenu client:load>
+      {
+        mobile.map((item) => (
+          <MobileMenuItem url={item.url} title={item.title} />
+        ))
+      }
+    </MobileMenu>
+  </div>
+</div>
+
+<div class="container" style="flex: 5">
+  <slot />
+</div>
+
+<style>
+
+</style>

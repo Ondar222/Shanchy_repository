@@ -1,0 +1,15 @@
+---
+const { title } = Astro.props
+---
+  <div class="container page__name">
+    {title}
+  </div>
+
+  <style>
+    @media (max-width: 767px) {
+      .container .page__name{
+   display: none;
+   background: red;
+  }
+    }
+  </style>

@@ -1,0 +1,55 @@
+---
+import MobileMenu from "../components/MobileMenu";
+import MobileMenuItem from "../components/MobileMenu/MobileMenuItem";
+import SidebarMenu from "../components/Sidebar/SidebarMenu";
+import SidebarMenuItem from "../components/Sidebar/SidebarMenuItem";
+
+const sidebar = [
+  { url: "/management", title: "Руководство" },
+  { url: "/about/structure", title: "Структура" },
+  { url: "/news", title: "Новости" },
+  { url: "/about/occupationalSecurity", title: "Охрана труда" },
+  { url: "/about/anticorruption", title: "Противодействие коррупции" },
+  { url: "/about/antiterror", title: "Противодействие терроризму" },
+  { url: "/civilservice", title: "Государственная служба" },
+  { url: "/about/purchases", title: "Государственные закупки" },
+  { url: "/about/reception", title: "Прием граждан" },
+];
+
+const mobile = [
+  { url: "/", title: "Главная" },
+  { url: "/documents", title: "Документы" },
+  { url: "/appeals", title: "Прием обращений" },
+  { url: "/about", title: "Об администрации" },
+  { url: "/activity", title: "Деятельность" },
+  { url: "/contacts", title: "Контакты" },
+  { url: "/management", title: "Руководство" },
+  { url: "/about/structure", title: "Структура" },
+  { url: "/news", title: "Новости" },
+  { url: "/about/occupationalSecurity", title: "Охрана труда" },
+  { url: "/about/anticorruption", title: "Противодействие коррупции" },
+  { url: "/about/antiterror", title: "Антитеррористическая деятельность" },
+  { url: "/civilservice", title: "Государственная служба" },
+  { url: "/about/purchases", title: "Государственные закупки" },
+  { url: "/about/reception", title: "Прием граждан" },
+];
+---
+
+<div class="container">
+  <MobileMenu client:load>
+    {mobile.map((item) => <MobileMenuItem url={item.url} title={item.title} />)}
+  </MobileMenu>
+  <div class="layout">
+    <SidebarMenu>
+      {
+        sidebar.map((item) => (
+          <SidebarMenuItem url={item.url} title={item.title} />
+        ))
+      }
+    </SidebarMenu>
+
+    <div class="layout__children">
+      <slot />
+    </div>
+  </div>
+</div>

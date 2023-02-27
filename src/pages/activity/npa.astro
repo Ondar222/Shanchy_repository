@@ -1,0 +1,38 @@
+---
+import ActivityPageLayout from "../../layouts/ActivityPageLayout.astro";
+import StandartLayout from "../../layouts/StandartLayout.astro";
+import PageName from "../../components/PageName/PageName.astro";
+import DocumentLink from "../../components/Document/DocumentLink";
+
+const res = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/npa-page?populate[0]=page.documents&populate[1]=slider.image&populate[2]=pinned_links.image`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+---
+
+<StandartLayout
+  title="Перечень законов и иных нормативно-правовых актов, определяющих полномочия, задачи, функции государственного органа"
+>
+  <PageName
+    title="Перечень законов и иных нормативно-правовых актов, определяющих полномочия, задачи, функции государственного органа"
+  />
+  <ActivityPageLayout>
+    <div class="w-full flex gap-7">
+      <div class="xs:w-full md:w-4/5 flex flex-col gap-4">
+        <div class="break-keep" set:html={res?.page?.content} />
+        {
+          res?.page?.documents?.map((item) => (
+            <DocumentLink
+              client:load
+              filename={item.file.name}
+              url={import.meta.env.PUBLIC_URL + item.file.url}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </ActivityPageLayout>
+</StandartLayout>

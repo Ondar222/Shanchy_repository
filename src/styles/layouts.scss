@@ -1,0 +1,49 @@
+@media (max-width: 768px){
+  .header{
+    
+  }
+  .container .page__name{
+    display: none;
+  }
+  .layout{
+
+  }
+  .container{
+
+  }
+
+  .img{
+  
+  }
+  .mobile-navbar{
+    
+  }
+  .layout__children{
+    
+  }
+  .layout{
+    padding: 20px 20px;
+  }
+  .layout img{
+    
+  }
+  
+}
+
+.layout {
+  /* flex xs:flex-col md:flex-row gap-5 */
+  display: flex;
+  gap: 15px;
+}
+
+.layout__children {
+  width: 100%;
+  display: flex;
+ /* [&>ul]:list-disc [&>p]:text-justify sm:py-3 xs:py-3 md:py-0 lg:py-0 */
+}
+
+.container__page__deyatelnost{
+  flex: 5;
+}
+
+

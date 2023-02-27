@@ -1,0 +1,36 @@
+---
+import HeaderNavbar from "./HeaderNavbar";
+import { FaRegEye } from "react-icons/fa/index.js";
+import HeaderSearchField from "./HeaderSearchField";
+---
+<script src="https://lidrekon.ru/slep/js/jquery.js" is:inline></script>
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js" is:inline></script>
+<header>
+  <div class="container header">
+    <div class="header__brand">
+      <img
+        alt="some"
+        src="/tuvan_herb.png"
+        width={55}
+        height={55}
+        class="header__brand-logo"
+      />
+
+      <h1 class="header__brand_name">
+        <a href="/">
+          Администрация с.Шанчы Чаа-Хольского кожууна</a>
+      </h1>
+    </div>
+
+    <div class="header__service">
+      <FaRegEye id="specialButton" className="header__service__bvi" />
+      <HeaderSearchField client:load />
+    </div>
+  </div>
+
+  <HeaderNavbar />
+  <!-- <script src="https://lidrekon.ru/slep/js/jquery.js" is:inline></script>
+  <script src="bvi.js" is:inline></script> -->
+</header>
+
+

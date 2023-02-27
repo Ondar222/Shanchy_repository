@@ -1,0 +1,37 @@
+---
+const params = Astro.props;
+---
+
+<div class="">
+  <div class="">
+    <h3>{params.title}</h3>
+  </div>
+
+  <div class="">
+    <div class="img_container_md">
+      <img
+        alt="some"
+        src={import.meta.env.PUBLIC_URL + params.image}
+        width="300px"
+        height="200px"
+        class="dark:grayscale"
+      />
+    </div>
+
+    <div class="">
+      <div set:html={params.shortDescription}></div>
+
+      <a
+        href={`${import.meta.env.PUBLIC_URL}` + params.documentURL}
+        class="button dark:bg-gray-500"
+        >Паспорт программы
+      </a>
+    </div>
+  </div>
+
+  <div class="">
+    <p>Статус: {params.status}</p>
+
+    <a href={"projects/project-"+params.href} class="button dark:bg-gray-500">Подробнее</a>
+  </div>
+</div>

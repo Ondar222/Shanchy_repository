@@ -1,0 +1,96 @@
+@media (max-width: 767px){
+  .rounded-full{
+    position: relative;
+    inset: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: none;
+    margin: auto;
+    display: block;
+    max-width: 80% !important;
+    object-fit: cover;
+  }
+.person__block{
+
+
+}
+  .image{
+    
+  }
+  .date__information{
+  
+  }
+  .date{
+  
+  }
+  .date__card{
+
+  }
+.position{
+ display: flex;
+ flex-direction: column;
+
+
+}
+.card{
+  display: flex;
+  flex-direction: column;
+}
+.text__footer{
+}
+.card__footer{
+  text-align: center !important;
+}
+}
+
+.card {
+  border-style: solid;
+  border-color: rgb(202, 200, 200);
+}
+
+.position {
+  background-color: #fff;
+  display: flex;
+
+
+}
+.date{
+  padding: 10px 20px;
+  text-align: left;
+}
+.date__card {
+  padding: 30px 20px;
+}
+.date__information {
+ padding: 30px 20px;
+ text-align: center;
+}
+
+
+.rounded-full {
+  max-width: 180px;
+  min-width: 180px;
+  height: 100%;
+  border-radius: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  object-fit: cover;
+}
+.text__footer {
+  color: black;
+  
+}
+
+.card__footer {
+  height: 50px;
+  background-color: rgb(228, 227, 227);
+  text-align: end;
+  padding: 20px 20px;
+}
+.header__header{
+  background-color: rgb(228, 227, 227);
+  padding: 20px 20px;
+  font-weight: bold;
+}

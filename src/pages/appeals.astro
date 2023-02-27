@@ -1,0 +1,301 @@
+---
+import PageName from "../components/PageName/PageName.astro";
+import MainPageLayout from "../layouts/MainPageLayout.astro";
+import AppealPageNotice from "../components/SendAppeal/AppealPageNotice";
+import StandartLayout from "../layouts/StandartLayout.astro";
+import DocumentLink from "../components/Document/DocumentLink";
+---
+
+<StandartLayout title="Прием обращений">
+  <MainPageLayout>
+    <PageName title="Прием обращений" />
+
+    <AppealPageNotice />
+
+    <form class="">
+      <div class="btn_appeal">
+        <input class="btn_one"
+          type="text"
+          name="surname"
+          placeholder="Фамилия"
+          maxlength={30}
+          required
+          class=""
+        />
+        <input class="btn_two"
+          type="text"
+          name="name"
+          placeholder="Имя"
+          maxlength={30}
+          required
+          class=""
+        />
+        <input class="btn_three"
+          type="text"
+          name="patronymic"
+          placeholder="Отчество"
+          maxlength={30}
+          required
+          class=""
+        />
+        <input class="btn_fourth"
+          name="phone"
+          placeholder="Номер телефона"
+          maxlength={12}
+          required
+          type="text"
+          required
+          class=""
+        />
+        <input class="btn_five"
+          type="text"
+          name="email"
+          placeholder="Адрес электронной почты"
+          maxlength={30}
+          required
+          class=""
+        />
+        <textarea class="btn_sixth"
+          name="body"
+          rows={7}
+          placeholder="Введите ваше сообщение"
+          required
+          maxlength="1500"
+          class=""
+        ></textarea>
+        <p class="appeal-paragraph">
+          В случае необходимости в подтверждение своих доводов гражданин вправе
+          приложить к обращению необходимые документы и материалы в электронной
+          форме, воспользовавшись функцией «Прикрепить файл».
+        </p>
+        <p class="appeal-paragraph">
+          Обращаем внимание, что прикрепляемые в предложенном на сайте формате
+          документы и материалы служат лишь подтверждением доводов автора
+          обращения, изложенных в тексте обращения.
+        </p>
+        <p class="appeal-paragraph">
+          Приложить необходимые документы и материалы в электронной форме можно
+          в любой последовательности двумя самостоятельными вложениями файла без
+          архивирования (файл вложения) по одному из двух разных типов
+          допустимых форматов:
+        </p>
+        <p class="appeal-paragraph">
+          текстового (графического) формата: txt, doc, docx, rtf, xls, xlsx,
+          pps, ppt, odt, ods, odp, pub, pdf, jpg, jpeg, bmp, png, tif, gif, pcx;
+        </p>
+        <p class="appeal-paragraph">аудио- (видео-) формата: mp3, wma, avi, mp4, mkv, wmv, mov, flv.</p>
+        <p class="appeal-paragraph">Иные форматы не обрабатываются.</p>
+        <p class="appeal-paragraph">
+          При подключении оборудования пользователя к сети «Интернет» по
+          выделенным каналам связи с использованием технологий ADSL, 3G, 4G,
+          WiFi и иных технологий, обеспечивающих аналогичные скорости передачи
+          данных в сети «Интернет», передача и обработка файла(ов) с суммарным
+          размером: - до 5 Мб осуществляется, как правило, без задержки во
+          времени; - от 5 Мб до 10 Мб может осуществляться с задержкой во
+          времени; - свыше 10 Мб может быть не осуществлена.
+        </p>
+        <p class="appeal-paragraph">
+          Для приложения к обращению необходимых документов и материалов в
+          электронной форме нажмите кнопку «Выберите файл».
+        </p>
+
+        <input class="appeal-input"
+         type="file" name="files" multiple />
+      </div>
+
+      <div class="introduction">
+       
+          <p class="appeal-paragraph">Я ознакомлен с</p>
+          <DocumentLink
+            filename="Политикой обработки персональных данных"
+            url={`${import.meta.env.PUBLIC_URL}/uploads/politika_obrabotki_personalnyh_dannyh_e79f438d7a.pdf?updated_at=2022-11-24T03:08:46.185Z`}
+          />
+          <p>и принимаю публичную Оферту</p>
+     
+      </div>
+
+      <input class="appeal-input"
+        type="submit"
+        value="Отправить"
+        class="text-white bg-blue-800 border border-blue-900 rounded py-2 px-3 curson-pointer"
+      />
+    </form>
+
+    <script type="text/javascript">
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = {};
+        const formData = new FormData();
+
+        Array.from(form.elements).forEach(
+          ({ name, type, value, files, ...elements }) => {
+            if (!["submit", "file"].includes(type)) {
+              data[name] = value;
+            } else if (type === "file") {
+              Array.from(files).forEach((file) => {
+                formData.append(`files.${name}`, file, file.name);
+              });
+            }
+          }
+        );
+
+        formData.append("data", JSON.stringify(data));
+        try {
+          await fetch(`${import.meta.env.PUBLIC_URL}/api/appeals`, {
+            method: "POST",
+            body: formData,
+          })
+          .then((req) => console.log(req.json()))
+          .catch((e) => console.error(e));
+        } catch (err) {
+          console.log(err);
+        }
+      });
+
+      
+    </script>
+
+    <style lang="css">
+      .disabled {
+        width: fit-content;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: #3b82f6;
+        color: #ffffff;
+        font-weight: 700;
+        border-radius: 0.25rem;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .activated {
+        width: fit-content;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: #3b82f6;
+        color: #ffffff;
+        font-weight: 700;
+        border-radius: 0.25rem;
+        border-color: #1d4ed8;
+      }
+
+      .activated:hover {
+        background-color: #1d4ed8;
+      }
+      .btn_appeal{
+        width: 100%;
+      }
+      .btn_one{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        margin-top: 1em;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .btn_two{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 1em;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .btn_three{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 1em;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .btn_fourth{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 1em;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .btn_five{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 1em;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .btn_sixth{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 1em;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+        box-sizing: border-box;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+      .appeal-paragraph{
+        margin-top: 1em;
+      }
+      .appeal-input{
+        margin: 0px 20px;
+        width: 100px;
+        height: 40px;
+      }
+    </style>
+  </MainPageLayout>
+</StandartLayout>

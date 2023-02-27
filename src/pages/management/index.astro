@@ -1,0 +1,84 @@
+---
+import PersonCard from "../../components/Person/PersonCard.astro";
+import PageName from "../../components/PageName/PageName.astro";
+import AboutPageLayout from "../../layouts/AboutPageLayout.astro";
+import StandartLayout from "../../layouts/StandartLayout.astro";
+
+const staff = await fetch(`${import.meta.env.PUBLIC_URL}/api/managements?populate[0]=person_data.image&populate[1]=professional_data`)
+  .then((res) => res.json())
+  .then((res) => res.data);
+
+const sliderLinks = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/links-on-sliders?pagination[page]=1&pagination[pageSize]=3&populate=*`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+---
+
+<StandartLayout title="Руководство Администрации Чаа-Хольского кожууна">
+  <PageName title="Руководство Администрация Чаа-Хольского кожууна" />
+  <AboutPageLayout>
+    <div class="">
+      <div class="">
+        {
+          staff?.map((item: any) => {
+            if (item.id === 2) {
+              return (
+                <span class="">
+                  <PersonCard
+                    id={item.id}
+                    key={item.id}
+                    surname={item.person_data.surname}
+                    name={item.person_data.name}
+                    patronymic={item.person_data.patronymic}
+                    position={item.professional_data.position}
+                    education={item.person_data.education}
+                    biography={item.person_data.biography}
+                    email={item.professional_data.email}
+                    phone={item.professional_data.phone}
+                    avatar={item.person_data.image}
+                  />
+                </span>
+              );
+            } else {
+              return (
+                <PersonCard
+                    id={item.id}
+                    key={item.id}
+                    surname={item.person_data.surname}
+                    name={item.person_data.name}
+                    patronymic={item.person_data.patronymic}
+                    position={item.professional_data.position}
+                    education={item.person_data.education}
+                    biography={item.person_data.biography}
+                    email={item.professional_data.email}
+                    phone={item.professional_data.phone}
+                    avatar={item.person_data.image}
+                  />
+              );
+            }
+          })
+        }
+      </div>
+      <div class="">
+        {
+          sliderLinks?.map((item) => {
+            return (
+              <a href={item.url} class="">
+                <img
+                  src={`${import.meta.env.PUBLIC_URL}${item.image.url}`}
+                  alt="First slide"
+                  width="240px"
+                  height="240px"
+                  class=""
+                />
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </AboutPageLayout>
+</StandartLayout>

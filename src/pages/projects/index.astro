@@ -1,0 +1,45 @@
+---
+import PageName from "../../components/PageName/PageName.astro";
+import ProjectCard from "../../components/Projects/ProjectCard.astro";
+import ActivityPageLayout from "../../layouts/ActivityPageLayout.astro";
+import StandartLayout from "../../layouts/StandartLayout.astro";
+
+const projects = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/projects?populate[0]=page.documents&populate[1]=slider.image&populate[2]=pinned_links.image`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+---
+
+<StandartLayout title="Нормотворческая деятельность государственного органа">
+  <PageName title="Нормотворческая деятельность государственного органа" />
+
+  <ActivityPageLayout>
+    {
+      projects.length >= 1 ? (
+        projects?.map((item) => {
+          return (
+            <a href={`/projects/project-`+item.id}>{item?.page?.title}</a>
+            // <ProjectCard
+            //   key={item.id}
+            //   id={item.id}
+            //   title={item.title}
+            //   shortDescription={item.description}
+            //   href={item.id}
+            //   status={item.status}
+            //   image={item.image.url}
+            //   documentURL={item.documentation.url}
+            // />
+          );
+        })
+      ) : (
+        <p>
+          В настоящий момент Полномочным представительством Республики Тыва в г.
+          Москве каких- либо проектов нормативно-правовых актов внесено не было.
+        </p>
+      )
+    }
+  </ActivityPageLayout>
+</StandartLayout>

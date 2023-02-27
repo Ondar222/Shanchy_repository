@@ -1,0 +1,43 @@
+---
+const params = Astro.props;
+---
+
+<div class="card">
+  <div class="header__header">
+    <h3 class="text__position">{params.position}</h3>
+  </div>
+  <div class="person__block">
+
+    <div class="position"> 
+        <img
+          src={import.meta.env.PUBLIC_URL + params.avatar.url}
+          alt="some"
+          width="200"
+          height="200"
+          class="rounded-full"
+        />
+  
+  <div class="date__information">
+    <div class="date">
+      <p>{params.surname}</p>
+      <p>{params.name}</p>
+      <p>{params.patronymic}</p>
+    </div>
+  
+    <div class="date">
+      <p>{params.phone}</p>
+      <p>{params.email}</p>
+    </div>
+  </div>
+  
+    </div>
+    <div class="card__footer">
+      <a class="text__footer" href={`/management/person-${params.id}`}
+        >Время приема: каждую неделю в четверг с 16:30</a
+      >
+    </div>
+    </div>
+  </div>
+
+
+

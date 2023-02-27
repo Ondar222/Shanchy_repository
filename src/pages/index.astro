@@ -1,0 +1,35 @@
+---
+import MainPageLayout from "../layouts/MainPageLayout.astro";
+import StandartLayout from "../layouts/StandartLayout.astro";
+import LastPosts from "../components/LastPosts/LastPosts";
+import MainpageSlider from "../components/Carousel/Carousel";
+
+const res = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/main-page?populate[0]=slider.image&populate[1]=page.document`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+
+const news = await fetch(
+  `${
+    import.meta.env.PUBLIC_URL
+  }/api/posts?pagination[page]=1&pagination[pageSize]=5&sort=createdAt:desc&populate=*`
+)
+  .then((res) => res.json())
+  .then((res) => res.data);
+---
+
+<StandartLayout title="Администрация Чаа-Хольского кожууна">
+  <MainPageLayout>
+    <div class="post__card__main">
+      <MainpageSlider slider={res.slider} client:only />
+      <div class="post__card__news">
+        <LastPosts news={news} client:load />
+      </div>
+    </div>
+
+    <!-- <PinnedLinks content={res.pinned_links} /> -->
+  </MainPageLayout>
+</StandartLayout>

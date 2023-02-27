@@ -1,0 +1,54 @@
+---
+import MobileMenu from "../components/MobileMenu";
+import MobileMenuItem from "../components/MobileMenu/MobileMenuItem";
+import SidebarMenu from "../components/Sidebar/SidebarMenu";
+import SidebarMenuItem from "../components/Sidebar/SidebarMenuItem";
+---
+
+<div class="container__page__deyatelnost">
+  <MobileMenu>
+    <MobileMenuItem url="/" title="Главная" />
+    <MobileMenuItem url="/documents" title="Документы" />
+    <MobileMenuItem url="/sendrequest" title="Прием обращений" />
+    <MobileMenuItem url="/about" title="О государственном органе" />
+    <MobileMenuItem url="/activity" title="Деятельность" />
+    <MobileMenuItem url="/press-service" title="Пресс-служба" />
+    <MobileMenuItem url="/contacts" title="Контакты" />
+    <MobileMenuItem
+      title="Нормотворческая деятельность государственного органа"
+      url="/projects"
+    />
+    <MobileMenuItem
+      title="Функции государственного органа"
+      url="/activity/functions"
+    />
+    <MobileMenuItem
+      title="Перечень законов и иных нормативно-правовых актов, определяющих полномочия, задачи, функции государственного органа"
+      url="/activity/npa"
+    />
+  </MobileMenu>
+  <div class="container mx-auto text-black font-light min-h-[500px]">
+    <div class="layout">
+      <SidebarMenu>
+        <SidebarMenuItem
+          title="Нормотворческая деятельность государственного органа"
+          url="/projects"
+        />
+        <SidebarMenuItem
+          title="Функции государственного органа"
+          url="/activity/functions"
+        />
+        <SidebarMenuItem
+          title="Перечень законов и иных нормативно-правовых актов, определяющих полномочия, задачи, функции государственного органа"
+          url="/activity/npa"
+        />
+      </SidebarMenu>
+
+      <div
+        class="layout__children"
+      >
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
